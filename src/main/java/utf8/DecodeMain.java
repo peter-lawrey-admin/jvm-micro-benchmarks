@@ -65,7 +65,7 @@ public class DecodeMain {
     }
 
     @Benchmark
-    public CharSequence simpleFromUTF8() {
+    public CharSequence decode_fromUTF8() {
         bb.clear();
         byte[] bytes = new byte[bb.remaining()];
         bb.get(bytes);
@@ -75,7 +75,7 @@ public class DecodeMain {
     }
 
     @Benchmark
-    public CharSequence usingSimpleLoop() {
+    public CharSequence decode_usingSimpleLoop() {
         bb.clear();
         sb.setLength(0);
         ascii:
@@ -92,7 +92,7 @@ public class DecodeMain {
     }
 
     @Benchmark
-    public CharSequence usingCharArray() throws IllegalAccessException {
+    public CharSequence decode_usingCharArray() throws IllegalAccessException {
         bb.clear();
         sb.setLength(0);
         int len = bb.capacity();
@@ -114,7 +114,7 @@ public class DecodeMain {
     }
 
     @Benchmark
-    public CharSequence usingCharArrayAndAddress() throws IllegalAccessException {
+    public CharSequence decode_usingCharArrayAndAddress() throws IllegalAccessException {
         long address = ((DirectBuffer) bb).address();
         sb.setLength(0);
         int len = bb.capacity();

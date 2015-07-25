@@ -57,13 +57,13 @@ public class EncodeMain {
     }
 
     @Benchmark
-    public void simpleToUTF8() {
+    public void encode_simpleToUTF8() {
         bb.clear();
         bb.put(text.getBytes(StandardCharsets.UTF_8));
     }
 
     @Benchmark
-    public void usingSimpleLoop() {
+    public void encode_usingSimpleLoop() {
         bb.clear();
         ascii:
         {
@@ -78,7 +78,7 @@ public class EncodeMain {
     }
 
     @Benchmark
-    public void usingSimpleLoopUnrolled() {
+    public void encode_usingSimpleLoopUnrolled() {
         bb.clear();
         ascii:
         {
@@ -94,7 +94,7 @@ public class EncodeMain {
     }
 
     @Benchmark
-    public void unsafeLoopCharArray() throws IllegalAccessException {
+    public void encode_unsafeLoopCharArray() throws IllegalAccessException {
         long address = ((DirectBuffer) bb).address(), ptr = address;
         char[] value = (char[]) VALUE.get(text);
         if (bb.capacity() < value.length * 3)
@@ -112,7 +112,7 @@ public class EncodeMain {
     }
 
     @Benchmark
-    public void unsafeLoopCharAt() {
+    public void encode_unsafeLoopCharAt() {
         long address = ((DirectBuffer) bb).address(), ptr = address;
         if (bb.capacity() < text.length() * 3)
             throw new AssertionError();
@@ -130,7 +130,7 @@ public class EncodeMain {
     }
 
     @Benchmark
-    public void unsafeLoopCharAtUnrolled() {
+    public void encode_unsafeLoopCharAtUnrolled() {
         long address = ((DirectBuffer) bb).address(), ptr = address;
         if (bb.capacity() < text.length() * 3)
             throw new AssertionError();
