@@ -12,7 +12,7 @@ import sun.nio.ch.DirectBuffer;
 
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 
 /**
  * Created by peter.lawrey on 24/07/2015.
@@ -29,13 +29,7 @@ public class DecodeMain {
     static final Unsafe UNSAFE;
 
     static final Field VALUE, COUNT;
-    ByteBuffer bb = ByteBuffer.allocateDirect(128); // plenty for a 64 character string.
-    StringBuilder sb = new StringBuilder();
-
-    {
-        bb.clear();
-        bb.put(text.getBytes(StandardCharsets.UTF_8));
-    }
+    private static final Charset UTF_8 = Charset.forName("UTF-8");
 
     static {
         assert text.length() == 128;
@@ -55,6 +49,14 @@ public class DecodeMain {
         }
     }
 
+    ByteBuffer bb = ByteBuffer.allocateDirect(128); // plenty for a 64 character string.
+    StringBuilder sb = new StringBuilder();
+
+    {
+        bb.clear();
+        bb.put(text.getBytes(UTF_8));
+    }
+
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .include(DecodeMain.class.getSimpleName())
@@ -69,7 +71,7 @@ public class DecodeMain {
         bb.clear();
         byte[] bytes = new byte[bb.remaining()];
         bb.get(bytes);
-        String s = new String(bytes, StandardCharsets.UTF_8);
+        String s = new String(bytes, UTF_8);
         assert s.equals(text);
         return s;
     }

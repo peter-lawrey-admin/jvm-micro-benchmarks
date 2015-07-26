@@ -12,7 +12,7 @@ import sun.nio.ch.DirectBuffer;
 
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 
 /**
  * The purpose of this test is to converting a CharSequence to a direct buffer.
@@ -29,6 +29,7 @@ public class EncodeMain {
     static final Unsafe UNSAFE;
 
     static final Field VALUE;
+    private static final Charset UTF_8 = Charset.forName("UTF-8");
 
     static {
         assert text.length() == 128;
@@ -59,7 +60,7 @@ public class EncodeMain {
     @Benchmark
     public void encode_simpleToUTF8() {
         bb.clear();
-        bb.put(text.getBytes(StandardCharsets.UTF_8));
+        bb.put(text.getBytes(UTF_8));
     }
 
     @Benchmark
