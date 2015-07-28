@@ -31,3 +31,19 @@ EncodeMain.encode_unsafeLoopCharAtUnrolled  thrpt   20  13862767.881 �  39514.
 EncodeMain.encode_usingSimpleLoop           thrpt   20   8977483.098 �  34449.368  ops/s
 EncodeMain.encode_usingSimpleLoopUnrolled   thrpt   20   7027436.605 � 137810.247  ops/s
 ```
+
+Run on an E5-2650 v2 with Oraclre Java 8 update 51 with -Xmx64m (Ubuntu 15.04)
+
+```
+Benchmark                                    Mode  Cnt         Score        Error  Units
+DecodeMain.decode_fromUTF8                  thrpt   20   6286867.336 ±  86341.070  ops/s
+DecodeMain.decode_usingCharArray            thrpt   20   8764641.857 ±  33268.734  ops/s
+DecodeMain.decode_usingCharArrayAndAddress  thrpt   20  11328164.878 ±  75575.608  ops/s
+DecodeMain.decode_usingSimpleLoop           thrpt   20   1832553.738 ±   7666.224  ops/s
+EncodeMain.encode_simpleToUTF8              thrpt   20   5921890.505 ±  97402.981  ops/s
+EncodeMain.encode_unsafeLoopCharArray       thrpt   20  17719733.037 ± 918121.187  ops/s
+EncodeMain.encode_unsafeLoopCharAt          thrpt   20  19295214.288 ±  80538.706  ops/s
+EncodeMain.encode_unsafeLoopCharAtUnrolled  thrpt   20  14446669.872 ±  59633.767  ops/s
+EncodeMain.encode_usingSimpleLoop           thrpt   20   9086042.303 ±  27818.989  ops/s
+EncodeMain.encode_usingSimpleLoopUnrolled   thrpt   20   7314359.149 ±  19259.337  ops/s
+```
