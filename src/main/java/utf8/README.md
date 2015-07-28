@@ -9,12 +9,12 @@ DecodeMain.decode_fromUTF8                  thrpt   20   7253280.165 ±  65361.7
 DecodeMain.decode_usingCharArray            thrpt   20   8390367.697 ±  68847.882  ops/s
 DecodeMain.decode_usingCharArrayAndAddress  thrpt   20  12741425.467 ± 195475.708  ops/s
 DecodeMain.decode_usingSimpleLoop           thrpt   20   1940184.123 ±  14156.122  ops/s
-EncodeMain.encode_simpleToUTF8              thrpt   20   6524452.015 ±  99366.190  ops/s
-EncodeMain.encode_unsafeLoopCharArray       thrpt   20  17866443.576 ± 550995.768  ops/s
-EncodeMain.encode_unsafeLoopCharAt          thrpt   20  22195216.955 ± 680471.754  ops/s
-EncodeMain.encode_unsafeLoopCharAtUnrolled  thrpt   20  17938440.097 ± 177015.494  ops/s
-EncodeMain.encode_usingSimpleLoop           thrpt   20   9851717.526 ±  24419.844  ops/s
-EncodeMain.encode_usingSimpleLoopUnrolled   thrpt   20   8054046.467 ±  40156.299  ops/s
+EncodeMain.encode_simpleToUTF8              thrpt   20   6499953.595 ±  69457.824  ops/s
+EncodeMain.encode_unsafeLoopCharArray       thrpt   20  19799238.628 ± 107360.636  ops/s
+EncodeMain.encode_unsafeLoopCharAt          thrpt   20  15252056.597 ±  98216.894  ops/s
+EncodeMain.encode_unsafeLoopCharAtUnrolled  thrpt   20  15264096.424 ±  64860.594  ops/s
+EncodeMain.encode_usingSimpleLoop           thrpt   20   8434139.748 ± 302338.290  ops/s
+EncodeMain.encode_usingSimpleLoopUnrolled   thrpt   20   6338738.829 ±  47627.463  ops/s
 ```
 
 Run on an i7-4770K with Oracle Java 8 update 51 and -Xmx64m (Windows 8.1)

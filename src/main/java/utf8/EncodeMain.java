@@ -58,13 +58,14 @@ public class EncodeMain {
     }
 
     @Benchmark
-    public void encode_simpleToUTF8() {
+    public ByteBuffer encode_simpleToUTF8() {
         bb.clear();
         bb.put(text.getBytes(UTF_8));
+        return bb;
     }
 
     @Benchmark
-    public void encode_usingSimpleLoop() {
+    public ByteBuffer encode_usingSimpleLoop() {
         bb.clear();
         ascii:
         {
@@ -73,13 +74,13 @@ public class EncodeMain {
                 if (ch > 0x7f) break ascii;
                 bb.put((byte) ch);
             }
-            return;
+            return bb;
         }
         throw new UnsupportedOperationException("Handled in full implementation");
     }
 
     @Benchmark
-    public void encode_usingSimpleLoopUnrolled() {
+    public ByteBuffer encode_usingSimpleLoopUnrolled() {
         bb.clear();
         ascii:
         {
@@ -89,13 +90,13 @@ public class EncodeMain {
                 if ((ch | ch2) > 0x7f) break ascii;
                 bb.putShort((short) ((ch << 8) | ch2));
             }
-            return;
+            return bb;
         }
         throw new UnsupportedOperationException("Handled in full implementation");
     }
 
     @Benchmark
-    public void encode_unsafeLoopCharArray() throws IllegalAccessException {
+    public ByteBuffer encode_unsafeLoopCharArray() throws IllegalAccessException {
         long address = ((DirectBuffer) bb).address(), ptr = address;
         char[] value = (char[]) VALUE.get(text);
         if (bb.capacity() < value.length * 3)
@@ -107,13 +108,13 @@ public class EncodeMain {
                 UNSAFE.putByte(ptr++, (byte) ch);
             }
             bb.position((int) (ptr - address));
-            return;
+            return bb;
         }
         throw new UnsupportedOperationException("Handled in full implementation");
     }
 
     @Benchmark
-    public void encode_unsafeLoopCharAt() {
+    public ByteBuffer encode_unsafeLoopCharAt() {
         long address = ((DirectBuffer) bb).address(), ptr = address;
         if (bb.capacity() < text.length() * 3)
             throw new AssertionError();
@@ -125,13 +126,13 @@ public class EncodeMain {
                 UNSAFE.putByte(ptr++, (byte) ch);
             }
             bb.position((int) (ptr - address));
-            return;
+            return bb;
         }
         throw new UnsupportedOperationException("Handled in full implementation");
     }
 
     @Benchmark
-    public void encode_unsafeLoopCharAtUnrolled() {
+    public ByteBuffer encode_unsafeLoopCharAtUnrolled() {
         long address = ((DirectBuffer) bb).address(), ptr = address;
         if (bb.capacity() < text.length() * 3)
             throw new AssertionError();
@@ -147,7 +148,7 @@ public class EncodeMain {
                 ptr += 4;
             }
             bb.position((int) (ptr - address));
-            return;
+            return bb;
         }
         throw new UnsupportedOperationException("Handled in full implementation");
     }
