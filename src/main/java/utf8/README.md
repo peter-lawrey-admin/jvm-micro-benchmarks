@@ -24,15 +24,15 @@ DecodeMain.decode_fromUTF8                  thrpt   20   6796923.881 �  22116.
 DecodeMain.decode_usingCharArray            thrpt   20   8116746.205 �  26883.030  ops/s
 DecodeMain.decode_usingCharArrayAndAddress  thrpt   20  11831718.908 � 109633.121  ops/s
 DecodeMain.decode_usingSimpleLoop           thrpt   20   1852540.497 �  65251.968  ops/s
-EncodeMain.encode_simpleToUTF8              thrpt   20   6556082.249 �  88612.336  ops/s
-EncodeMain.encode_unsafeLoopCharArray       thrpt   20  17307141.673 � 184737.866  ops/s
-EncodeMain.encode_unsafeLoopCharAt          thrpt   20  17922513.884 � 772599.551  ops/s
-EncodeMain.encode_unsafeLoopCharAtUnrolled  thrpt   20  13862767.881 �  39514.729  ops/s
-EncodeMain.encode_usingSimpleLoop           thrpt   20   8977483.098 �  34449.368  ops/s
-EncodeMain.encode_usingSimpleLoopUnrolled   thrpt   20   7027436.605 � 137810.247  ops/s
+EncodeMain.encode_simpleToUTF8              thrpt   20   6370133.609 �  50136.218  ops/s
+EncodeMain.encode_unsafeLoopCharArray       thrpt   20  17010210.148 � 413837.676  ops/s
+EncodeMain.encode_unsafeLoopCharAt          thrpt   20  12008413.335 � 125709.384  ops/s
+EncodeMain.encode_unsafeLoopCharAtUnrolled  thrpt   20  11752050.579 �  43969.260  ops/s
+EncodeMain.encode_usingSimpleLoop           thrpt   20   7895278.352 �  35139.565  ops/s
+EncodeMain.encode_usingSimpleLoopUnrolled   thrpt   20   5620780.588 �  72783.775  ops/s
 ```
 
-Run on an E5-2650 v2 with Oraclre Java 8 update 51 with -Xmx64m (Ubuntu 15.04)
+Run on an E5-2650 v2 with Oracle Java 8 update 51 with -Xmx64m (Ubuntu 15.04)
 
 ```
 Benchmark                                    Mode  Cnt         Score        Error  Units
