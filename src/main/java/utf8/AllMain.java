@@ -10,7 +10,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
  */
 public class AllMain {
 
-    // run with -Xmx8m
+    // run with -Xmx64m
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .include(DecodeMain.class.getSimpleName())
