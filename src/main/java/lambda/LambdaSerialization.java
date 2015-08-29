@@ -101,6 +101,22 @@ public class LambdaSerialization {
     }
 
     @Benchmark
+    public String javaSerializationCapturing() throws IOException, ClassNotFoundException {
+        String star = "*";
+        SerializableFunction<String, String> appendStar = s -> s + star;
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(appendStar);
+        oos.close();
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(byteArr = baos.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bais);
+        Function<String, String> fun = (Function<String, String>) ois.readObject();
+        return fun.apply("Hello");
+    }
+
+    @Benchmark
     public String javaSerializationWithEnum() throws IOException, ClassNotFoundException {
         SerializableFunction<String, String> appendStar = Functions.APPEND_STAR;
 
@@ -127,6 +143,18 @@ public class LambdaSerialization {
     }
 
     @Benchmark
+    public String wireSerializationCapturing() throws IOException, ClassNotFoundException {
+        String star = "*";
+        SerializableFunction<String, String> appendStar = s -> s + star;
+
+        bytes.clear();
+        wire.write().object(appendStar);
+
+        Function<String, String> fun = (Function<String, String>) wire.read().object(Object.class);
+        return fun.apply("Hello");
+    }
+
+    @Benchmark
     public String wireSerializationWithEnum() throws IOException, ClassNotFoundException {
         SerializableFunction<String, String> appendStar = Functions.APPEND_STAR;
 
@@ -140,6 +168,18 @@ public class LambdaSerialization {
     @Benchmark
     public String textWireSerialization() throws IOException, ClassNotFoundException {
         SerializableFunction<String, String> appendStar = s -> s + "*";
+
+        tbytes.clear();
+        twire.getValueOut().object(appendStar);
+
+        Function<String, String> fun = (Function<String, String>) twire.getValueIn().object(Object.class);
+        return fun.apply("Hello");
+    }
+
+    @Benchmark
+    public String textWireSerializationCapturing() throws IOException, ClassNotFoundException {
+        String star = "*";
+        SerializableFunction<String, String> appendStar = s -> s + star;
 
         tbytes.clear();
         twire.getValueOut().object(appendStar);
