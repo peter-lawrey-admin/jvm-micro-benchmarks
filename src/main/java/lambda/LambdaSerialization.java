@@ -54,18 +54,20 @@ public class LambdaSerialization {
                         throw new AssertionError(m + " returned " + ret);
                     }
 //                    }
+                    System.out.println("```");
                     if (main.byteArr != null) {
                         main.tbytes.readPosition(0);
-                        System.out.println(Bytes.wrapForRead(main.byteArr).toHexString());
+                        System.out.print(Bytes.wrapForRead(main.byteArr).toHexString());
                     }
                     if (main.bytes.writePosition() > 0) {
                         main.bytes.readPosition(0);
-                        System.out.println(main.bytes.toHexString());
+                        System.out.print(main.bytes.toHexString());
                     }
                     if (main.tbytes.writePosition() > 0) {
                         main.tbytes.readPosition(0);
-                        System.out.println(main.tbytes.toString());
+                        System.out.print(main.tbytes.toString());
                     }
+                    System.out.println("```");
                 }
             }
         } else {
@@ -204,7 +206,7 @@ public class LambdaSerialization {
             @Override
             public String apply(String s) {
                 return s + '*';
-            }
         }
+    }
     }
 }
